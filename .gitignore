@@ -1,3 +1,5 @@
+*_config.coffee
+node_modules/
 lib-cov
 *.seed
 *.log
