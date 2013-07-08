@@ -1,14 +1,14 @@
 Twit = require 'twit'
 sentiment = require 'sentiment'
-{Module} = require './extensions'
 
-class BankFan extends Module
+class BankFan
 
   scores:
     sue:-4, overdraft:-4, fees:-4, fee:-4, overdrawn:-4, bot:-4,
     foreclose:-8, foreclosure:-8, foreclosing:-8, lie: -4, thieves:-4,
-    account: -4, sucked:-4, sucks:-4, cares: 0, god: -1, routing: -4,
-    help: -3, checking: -3
+    account: -4, sucked:-4, sucks:-4, cares: 0, god: -4, routing: -4,
+    help:-3, checking:-3, app:15
+
   constructor: (credentials, opts)->
     @[k] = v for k, v of opts
     @twit = new Twit credentials
@@ -21,10 +21,14 @@ class BankFan extends Module
     @check_limits()
     counter = 0
     stream = @twit.stream 'statuses/filter', {@track, @lang}
+    stream.on 'limit', @log
+    stream.on 'warning', @log
     stream.on 'tweet', (tweet)=>
       if @valid_tweet tweet
         @if_we_should_respond tweet , =>
-          @respond_to tweet, -> process.exit() if (counter++) > 10
+          @respond_to tweet, ->
+            @log "RESPONDED TO", tweet
+            process.exit() if (counter++) > 10
 
   if_we_should_respond: ({text, user:{screen_name}}, respond)=>
     sentiment text, @scores, (err, result)=>
@@ -39,7 +43,7 @@ class BankFan extends Module
 
   say: (status, after)=>
     log_then = (args...)=> @log args; after()
-    return @twit.post( 'statuses/update', status, log_then ) if @live
+    return @twit.post( 'statuses/update', status, -> ) if @live
     log_then status
 
   log: (args...)-> console.log s for s in args
