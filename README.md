@@ -61,9 +61,9 @@ Install the BankFan library with:
 
     npm install bank-fan
 
-And in the same directory, make a javascript file called `biggest_fan.js`, filling in the
-key values from the 
+And in the same directory, make a javascript file called `biggest_fan.js`:
 
+```javascript
     BankFan = require('bank-fan');
     
     new BankFan( {
@@ -80,6 +80,7 @@ key values from the
       shame_name: 'Bank of America',
       shame_link: 'http://goo.gl/OGbaP'
     });
+```
 
 Then run your fan with
 
