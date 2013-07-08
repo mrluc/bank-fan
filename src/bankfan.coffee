@@ -1,12 +1,13 @@
+Twit = require 'twit'
 class BankFan
   scores:
-    sue:-4, overdraft:-4, fees:-4, fee:-4, overdrawn:-4, bot:-4, foreclose:-8, foreclosure:-8, foreclosing:-8, lie: -4, 
+    sue:-4, sued:-4, overdraft:-4, fees:-4, fee:-4, overdrawn:-4, bot:-4, foreclose:-8, foreclosure:-8, foreclosing:-8, lie: -4, 
     account: -4, sucked:-4, sucks:-4, cares: 0, god: -4, routing: -4, thieves:-4, thieving: -8, nypd: -8
     help:-3, checking:-3, app:15, criminals: -8, banks: -1, unacceptable: -4, atm: -8, atms:-8
 
   constructor: (credentials, opts) ->
     @[k] = v for k, v of opts
-    @twit = new require('twit') credentials
+    @twit = new Twit credentials
     @twit.get 'application/rate_limit_status', (err, {@resources}, res)=> @log @resources
     @annoy()
 
@@ -22,10 +23,12 @@ class BankFan
       @log "SENTIMENT ANALYSIS: ", text, screen_name, JSON.stringify result
       if Math.abs(result.score) > @intensity
         status = if -(@intensity) > result.score
-          "@#{ screen_name } maybe @BofA_Help has some input here? http://goo.gl/OGbaP"
-        else "@#{ screen_name } Bank of America really rocks. http://goo.gl/OGbaP"
-        return @twit.post( 'statuses/update', {in_reply_to_status_id: id, status}, after) if @live
+          "@#{screen_name} maybe #{@shame_screen_name} has some input here? http://goo.gl/OGbaP"
+        else "@#{screen_name} #{@shame_name} really rocks. http://goo.gl/OGbaP"
+        @log "TWEETING #{status}"
+        @twit.post( 'statuses/update', {in_reply_to_status_id: id, status}, after) if @live
 
   log: (args...) -> console.log s for s in args
 
-new BankFan require('./twitter_config'), live: yes, lang:'en', intensity: 2, track: 'BofA,BofA_Help,Bank of America,BankOfAmerica'
+module.exports = BankFan
+

@@ -1,0 +1,11 @@
+{
+  "name":            "bank-fan",
+  "description":     "Inspired by the great @BofA_Help bot, a demonstration of how to use Twitter's Streaming API with sentiment analysis to get yourself in trouble",
+  "keywords":        ["twitter","sentiment","coffee","bofa","bot"],
+  "author":          "Luc Fueston <superluc@gmail.com>",
+  "version":         "0.0.1",
+  "repository":      "git://github.com/mrluc/bank-fan",
+  "main":            "./lib/bankfan",
+  "engines":         {"node":">=0.6.0"}, 
+  "dependencies":    {"sentiment": "*","twit":"*"}
+}
