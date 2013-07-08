@@ -57,21 +57,37 @@ the messages more diverse.
 
 ### So How Do I Run It
 
-Well, of course you need a Twitter dev account. To run it, just add a 
-file called `twitter_config.coffee` that looks like:                           
-                                                                                                     
-```coffeescript                                                                                      
-module.exports =                                                                                     
-  consumer_key: ''                                                                                   
-  consumer_secret: ''                                                                                
-  access_token: ''                                                                                   
-  access_token_secret: ''                                                                            
-```
+Install the BankFan library with:
+
+    npm install bank-fan
+
+And in the same directory, make a javascript file called `biggest_fan.js`, filling in the
+key values from the 
+
+    BankFan = require('bank-fan');
+    
+    new BankFan( {
+      consumer_key: '',
+      consumer_secret: '',
+      access_token: '',
+      access_token_secret: ''
+    }, {
+      live: true,
+      lang:'en',
+      intensity: 2,
+      track: 'BofA,BofA_Help,Bank of America,BankOfAmerica',
+      shame_screen_name: '@BofA_Help',
+      shame_name: 'Bank of America',
+      shame_link: 'http://goo.gl/OGbaP'
+    });
+
+Then run your fan with
+
+    node biggest_fan.js
 
 You can fill in the values from any application in your dev.twitter.com account, 
-where you will see those fields on the first page. Then run:
+where you will see those fields on the first page of any of your apps.
 
-    coffee bankfan.coffee
 
 ## So, what'd you learn? 
 
