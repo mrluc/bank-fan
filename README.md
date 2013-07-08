@@ -15,14 +15,16 @@ then does sentiment analysis based on the [AFINN wordlist](http://neuro.imm.dtu.
 
 For instance, the tweet:
 
-    Protip:the @highmuseumofart is free 4 Bank of America users the 1st weekend of every month, & the new girl w/ a pearl earring exhib is great
+> Protip:the @highmuseumofart is free 4 Bank of America users the 1st weekend of every month, & the new girl w/ a pearl earring exhib is great
 
 ... appears positive. Sentiment analysis confirms:
 
     SENTIMENT ANALYSIS:
     
     {"score":4,"comparative":0.15384615384615385,
-     "tokens":["protipthe","highmuseumofart","is","free","","bank","of","america","users","the","st","weekend","of","every","month","amp","the","new","girl","w","a","pearl","earring","exhib","is","great"],
+     "tokens":["protipthe","highmuseumofart","is","free","","bank","of","america","users","the",
+               "st","weekend","of","every","month","amp","the","new","girl","w","a","pearl",
+               "earring","exhib","is","great"],
      "words":["free","great"],
      "positive":["free","great"],
      "negative":[]
@@ -31,20 +33,18 @@ For instance, the tweet:
 ... and so BankFan responds positively, with a link to a news story about
 another great Bank of America initiative: their bots!
 
-    @hfinz Bank of America really rocks. http://t.co/mzr134Z5hM
+> @screenName Bank of America really rocks. http://t.co/mzr134Z5hM
 
 Meanwhile, the tweet:
 
-    So the Bank of America ATM wants to play games w/me tonight &amp; take all my money I worked for all day today &amp; say it wasn't processed. Cool.
+> So the Bank of America ATM wants to play games w/me tonight &amp; take all my money I worked for all day today &amp; say it wasn't processed. Cool.
 
-Is recognized as negative, because we've extended the wordlist to 
-interpret words like 'atm', 'checking', 'routing', etc as heavily negative, ie,
-people are probably complaining about the ATM.
+Is recognized as negative, because we've extended the wordlist 
+with words like 'atm', 'checking', 'routing', etc. They need help, 
+and we respond appropriately, alerting them to
+the fantastic automated @BofA_Help service!
 
-So we recognize they need help -- respond constructively, alerting them to
-the fantastic @BofA_Help bot:
-
-    @methadonna maybe @BofA_Help has some input here? http://t.co/mzr134Z5hM
+> @screenName maybe @BofA_Help has some input here? http://t.co/mzr134Z5hM
 
 
 ### That Sounds Pretty Fishy
